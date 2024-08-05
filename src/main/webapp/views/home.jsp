@@ -16,12 +16,15 @@
     <link href="css/style.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
+<jsp:include page="menu.jsp"></jsp:include>
+<div class="container">
+</div>
 <div class="container">
     <div class="row mt-5">
         <div class="col">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="Home.jsp">Home</a></li>
+                    <li class="breadcrumb-item"><a href="home">Home</a></li>
                     <li class="breadcrumb-item"><a href="#">Category</a></li>
                     <li class="breadcrumb-item active" aria-current="#">Sub-category</li>
                 </ol>
@@ -39,7 +42,7 @@
                                          src="/image/${o.image}"
                                          alt="Card image cap">
                                     <div class="card-body">
-                                        <h4 class="card-title show_txt"><a href="#" title="View Product">${o.name}</a></h4>
+                                        <h4 class="card-title show_txt"><a href="detail?id=${o.id}" title="View Product">${o.name}</a></h4>
                                         <p class="card-text show_txt">${o.title}
                                         </p>
                                         <div class="row">

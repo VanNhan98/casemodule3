@@ -15,13 +15,13 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name = "ProductController", urlPatterns = {"/home"})
-public class HomeController extends HttpServlet {
+@WebServlet(name = "ProductController", urlPatterns = {"/home/*"})
+public class ProductController extends HttpServlet {
 
     private ProductService productService;
     private CategoryService categoryService;
 
-    public HomeController() {
+    public ProductController() {
         this.productService = new ProductService();
         this.categoryService = new CategoryService();
     }
@@ -29,12 +29,14 @@ public class HomeController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        // get data from the service
+        // get list of products
         List<Product> listProducts = productService.getAllProducts();
+
         List<Category> listCategories = categoryService.getAllCategories();
         // push the products, categories up to the view
         req.setAttribute("listProducts", listProducts);
         req.setAttribute("listCategories", listCategories);
+
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("/views/home.jsp");
         requestDispatcher.forward(req, resp);
     }
