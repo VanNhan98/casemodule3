@@ -35,4 +35,40 @@ public class AccountService {
         return null;
     }
 
+    public Account checkAccountExist(String username) {
+        String sql = "SELECT * FROM accounts WHERE username =? ";
+        try {
+            conn = DataConnect.getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, username);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Account account = new Account(rs.getInt("id"),
+                        rs.getString("username"),
+                        rs.getString("password"),
+                        rs.getInt("sell"),
+                        rs.getInt("admin"));
+                return account;
+            }
+
+        }catch(Exception e) {
+
+        }
+        return null;
+    }
+
+    public void signup(String username, String password) {
+        String sql = "INSERT INTO accounts(username, password, sell, admin) VALUES(?,?,0,0)";
+        try {
+            conn = DataConnect.getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, username);
+            ps.setString(2, password);
+            ps.executeUpdate();
+
+        }catch(Exception e) {
+
+        }
+    }
+
 }

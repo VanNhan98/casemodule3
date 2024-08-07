@@ -7,6 +7,7 @@ import com.example.demo.service.CategoryService;
 import com.example.demo.service.ProductService;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,13 +16,14 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name = "ProductController", urlPatterns = {"/home/*"})
-public class ProductController extends HttpServlet {
+@WebServlet(name = "HomeController", urlPatterns = {"/home/*"})
+public class HomeController extends HttpServlet {
 
     private ProductService productService;
     private CategoryService categoryService;
 
-    public ProductController() {
+
+    public HomeController() {
         this.productService = new ProductService();
         this.categoryService = new CategoryService();
     }
