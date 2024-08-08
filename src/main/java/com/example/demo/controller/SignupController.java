@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 @WebServlet(name = "LogoutController", urlPatterns = {"/signup/*"})
@@ -29,12 +30,11 @@ public class SignupController extends HttpServlet {
         String username = req.getParameter("username");
         String password = req.getParameter("password");
         String repass = req.getParameter("repass");
-
+        Account account = this.accountService.checkAccountExist(username);
         if (!password.equals(repass)) {
             req.setAttribute("errormatch", "password incorrect");
             req.getRequestDispatcher("/views/signup.jsp").forward(req, resp);
         } else {
-            Account account = this.accountService.checkAccountExist(username);
             if (account == null) {
                 this.accountService.signup(username, password);
                 resp.sendRedirect("login");
@@ -44,5 +44,6 @@ public class SignupController extends HttpServlet {
                 req.getRequestDispatcher("/views/signup.jsp").forward(req, resp);
             }
         }
+
     }
 }

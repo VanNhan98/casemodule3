@@ -5,16 +5,16 @@ public class Account {
     private String username;
     private String password;
     private int sell;
-    private int admin;
+    private int isadmin;
     public Account() {
     }
 
-    public Account(int id, String username, String password, int sell, int admin) {
+    public Account(int id, String username, String password, int sell, int isadmin) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.sell = sell;
-        this.admin = admin;
+        this.isadmin = isadmin;
     }
 
     public int getId() {
@@ -49,12 +49,12 @@ public class Account {
         this.sell = sell;
     }
 
-    public int getAdmin() {
-        return admin;
+    public int getIsadmin() {
+        return isadmin;
     }
 
-    public void setAdmin(int admin) {
-        this.admin = admin;
+    public void setIsadmin(int isadmin) {
+        this.isadmin = isadmin;
     }
 
     @Override
@@ -64,7 +64,7 @@ public class Account {
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", sell=" + sell +
-                ", admin=" + admin +
+                ", isadmin=" + isadmin +
                 '}';
     }
 }

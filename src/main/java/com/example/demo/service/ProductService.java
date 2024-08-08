@@ -84,6 +84,29 @@ public class ProductService {
         return null;
     }
 
+    public List<Product> getProductBySellId(int id) {
+        List<Product> list = new ArrayList<>();
+        // Fetch products from database and add them to the list
+        String sql = "select * from products where sellId = ?; ";
+        try{
+            conn = new DataConnect().getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            while(rs.next()) {
+                Product product = new Product(rs.getInt("id"),
+                        rs.getString("name")
+                        , rs.getString("image")
+                        , rs.getDouble("price")
+                        , rs.getString("title")
+                        , rs.getString("description"));
+                list.add(product);
+            }
+        }catch(Exception e){
+
+        }
+        return list;
+    }
 
 
     public List<Product> searchProductByName(String nameSearch) {
@@ -112,7 +135,7 @@ public class ProductService {
 
     public static void main(String[] args) {
         ProductService productService = new ProductService();
-        List<Product> list = productService.searchProductByName("dell");
+        List<Product> list = productService.getProductBySellId(2);
         for(Product product : list) {
             System.out.println(product);
         }

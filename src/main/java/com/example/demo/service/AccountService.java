@@ -25,7 +25,7 @@ public class AccountService {
                         rs.getString("username"),
                         rs.getString("password"),
                         rs.getInt("sell"),
-                        rs.getInt("admin"));
+                        rs.getInt("isadmin"));
                 return account;
             }
 
@@ -47,7 +47,7 @@ public class AccountService {
                         rs.getString("username"),
                         rs.getString("password"),
                         rs.getInt("sell"),
-                        rs.getInt("admin"));
+                        rs.getInt("isadmin"));
                 return account;
             }
 
