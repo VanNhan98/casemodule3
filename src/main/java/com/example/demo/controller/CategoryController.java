@@ -28,10 +28,10 @@ public class CategoryController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         // get id of product
         String id = req.getParameter("id");
-        List<Product> listProductsId = this.productService.getProductById(id);
+        List<Product> listProductsId = this.productService.getProductByCateId(id);
         // get list of categories
         List<Category> listCategories = categoryService.getAllCategories();
-        req.setAttribute("listCategories", listCategories);
+        req.setAttribute("listC", listCategories);
         // push
         req.setAttribute("listProducts", listProductsId);
         req.setAttribute("tag", id);

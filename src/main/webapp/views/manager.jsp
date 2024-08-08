@@ -1,4 +1,3 @@
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
@@ -18,12 +17,15 @@
 <body>
 <div class="container">
     <div class="table-wrapper">
-        <div class="table-title">
+        <div class="table-title ">
             <div class="row">
                 <div class="col-sm-6">
                     <h2>Manage <b>Product</b></h2>
                 </div>
                 <div class="col-sm-6">
+                    <button style="padding: 10px 20px" type="submit" class="btn btn-primary" data-bs-toggle="modal"
+                            data-bs-target="#addEmployeeModal">Add
+                    </button>
                 </div>
             </div>
         </div>
@@ -59,10 +61,9 @@
                     </td>
                     <td>${o.price} $</td>
                     <td>
-                        <div class="btn-action" >
-                            <button type="submit" class="btn btn-danger">Delete</button>
-                            <button type="submit" class="btn btn-primary">Add</button>
-                            <button type="submit" class="btn btn-warning">Edit</button>
+                        <div class="btn-action">
+                            <a href="delete?id=${o.id}" class="btn btn-danger" style="margin-right: 10px;">Delete</a>
+                            <a href="loadProduct?id=${o.id}" class="btn btn-warning">Edit</a>
                         </div>
 
                     </td>
@@ -87,6 +88,57 @@
         <button type="button" class="btn btn-primary">Back to home</button>
     </a>
 </div>
+
+<%--add modal--%>
+<div id="addEmployeeModal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form action="addProduct" method="post">
+                <div class="modal-header d-flex justify-content-between ">
+                    <h4 class="modal-title">Add Product</h4>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-hidden="true">X</button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Name</label>
+                        <input name="name" type="text" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Image</label>
+                        <input name="image" type="text" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Price</label>
+                        <input name="price" type="text" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Title</label>
+                        <textarea name="title" class="form-control" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Description</label>
+                        <textarea name="description" class="form-control" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Category</label>
+                        <select name="category" class="form-select" aria-label="Default select example">
+                            <c:forEach items="${listC}" var="o">
+                                <option value="${o.id}">${o.name}</option>
+                            </c:forEach>
+                        </select>
+                    </div>
+
+                </div>
+                <div class="modal-footer d-flex justify-content-between">
+                    <input id="addButton" type="button" class="btn btn-default" data-bs-dismiss="modal" value="Cancel">
+                    <input type="submit" class="btn btn-success" value="Add">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<%--end add modal--%>
 </body>
-<script src="js/manager.js" type="text/javascript"></script>
+
+
 </html>

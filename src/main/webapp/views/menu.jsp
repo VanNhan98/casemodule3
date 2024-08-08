@@ -75,11 +75,11 @@
 
             <c:if test="${sessionScope.account != null}">
                 <li><a href="logout">Logout</a></li>
-                <li><a href="">${sessionScope.account.username}</a></li>
+                <li><a href="#">${sessionScope.account.username}</a></li>
             </c:if>
 
         </ul>
-        <img src="/image/avatar/123.png" class="user-pic" onclick="toggleMenu()">
+        <img src="/image/avatar/123.png" class="user-pic">
     </nav>
 </div>
 
