@@ -167,9 +167,23 @@ public class ProductService {
         return list;
     }
 
-    public static void main(String[] args) {
-        ProductService service = new ProductService();
-
-
+    public void updateProduct(String name, String image, double price, String title,
+                              String description, String category, int eid) {
+        String sql = "  UPDATE products SET name =?, image =?,  price =?, title =?, description =?, cateId =? WHERE id =? ";
+        try {
+            conn = new DataConnect().getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, name);
+            ps.setString(2, image);
+            ps.setDouble(3, price);
+            ps.setString(4, title);
+            ps.setString(5, description);
+            ps.setString(6, category);
+            ps.setInt(7, eid);
+            ps.executeUpdate();
+            System.out.println("Product inserted successfully!");
+        } catch (Exception e) {
+            System.out.println("Product error: " + e.getMessage());
+        }
     }
 }
