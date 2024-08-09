@@ -37,7 +37,7 @@ public class HomeController extends HttpServlet {
         List<Category> listCategories = categoryService.getAllCategories();
         // push the products, categories up to the view
         req.setAttribute("listProducts", listProducts);
-        req.setAttribute("listCategories", listCategories);
+        req.setAttribute("listC", listCategories);
 
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("/views/home.jsp");
         requestDispatcher.forward(req, resp);

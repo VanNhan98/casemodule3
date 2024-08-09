@@ -21,8 +21,8 @@ public class CategoryController extends HttpServlet {
     private CategoryService categoryService;
 
     public CategoryController() {
-        productService = new ProductService();
-        categoryService = new CategoryService();
+        this.productService = new ProductService();
+        this.categoryService = new CategoryService();
     }
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
