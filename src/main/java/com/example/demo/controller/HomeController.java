@@ -31,7 +31,7 @@ public class HomeController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<Product> list = this.productService.getAllProducts();
+        List<Product> list = this.productService.getProductsTop3();
         List<Category> categories = this.categoryService.getAllCategories();
         req.setAttribute("listProducts", list);
         req.setAttribute("listC", categories);

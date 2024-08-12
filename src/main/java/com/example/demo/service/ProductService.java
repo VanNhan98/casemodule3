@@ -234,6 +234,55 @@ public class ProductService {
         return list;
     }
 
+
+    public List<Product> getProductsTop3() {
+        List<Product> list = new ArrayList<>();
+        // Fetch products from database and add them to the list
+        String sql = "select * from products order by id limit 3; ";
+        try {
+            conn = new DataConnect().getConnection();
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Product product = new Product(rs.getInt("id"),
+                        rs.getString("name")
+                        , rs.getString("image")
+                        , rs.getDouble("price")
+                        , rs.getString("title")
+                        , rs.getString("description"));
+                list.add(product);
+            }
+        } catch (Exception e) {
+
+        }
+        return list;
+    }
+
+    public List<Product> getNextProducts (int amount) {
+        List<Product> list = new ArrayList<>();
+        String sql = "SELECT *\n" +
+                "FROM products \n" +
+                "ORDER BY id limit 3 offset ?";
+        try {
+            conn = new DataConnect().getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, amount);
+            rs = ps.executeQuery();
+            while(rs.next()) {
+                Product product = new Product(rs.getInt("id"),
+                        rs.getString("name")
+                        , rs.getString("image")
+                        , rs.getDouble("price")
+                        , rs.getString("title")
+                        , rs.getString("description"));
+                list.add(product);
+            }
+
+        }catch (Exception e) {
+            System.out.println("Error" +e.getMessage());
+        }
+        return list;
+    }
     public static void main(String[] args) {
         ProductService p = new ProductService();
         // pagingProductBySellId
@@ -244,4 +293,5 @@ public class ProductService {
             System.out.println(product);
         }
     }
+
 }

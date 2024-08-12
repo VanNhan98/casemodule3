@@ -27,15 +27,15 @@
 <div class="container" style="min-height: 600px;">
     <div class="row mt-5">
         <div class="container">
-            <div class="row">
+            <div class="row" >
                 <!-- Include left sidebar -->
                 <jsp:include page="left.jsp"></jsp:include>
 
                 <!-- Product list -->
                 <div class="col-sm-9">
-                    <div class="row">
+                    <div class="row" id="content">
                         <c:forEach items="${listProducts}" var="o">
-                            <div class="col-12 col-md-6 col-lg-4 mb-3">
+                            <div class=" amount col-12 col-md-6 col-lg-4 mb-3">
                                 <div class="card h-100">
                                     <img class="card-img-top" src="/image/${o.image}" alt="${o.name}">
                                     <div class="card-body">
@@ -52,6 +52,7 @@
                             </div>
                         </c:forEach>
                     </div>
+                    <button onclick="loadMore()" class="btn btn-primary">Load More</button>
                 </div>
             </div>
         </div>
@@ -62,5 +63,32 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    function loadMore() {
+        let amount = document.getElementsByClassName("amount").length;
+        $.ajax({
+            url: "/load",
+            type: "get",
+            data: {
+                exists: amount
+            },
+            success: function(data) {
+                let row = document.getElementById("content");
+                row.innerHTML += data;
+                sessionStorage.setItem('loadedContent', row.innerHTML);
+            },
+            error: function(xhr) {
+
+            }
+        });
+    }
+
+    $(document).ready(function () {
+        let loadedContent = sessionStorage.getItem('loadedContent');
+        if (loadedContent) {
+            document.getElementById('content').innerHTML = loadedContent;
+        }
+    });
+</script>
 </body>
 </html>
