@@ -83,6 +83,24 @@
         });
     }
 
+    function searchByName(params) {
+        let nameSearch = params.value;
+        $.ajax({
+            url: "/searchAjax",
+            type: "get",
+            data: {
+                name: nameSearch
+            },
+            success: function(data) {
+                let row = document.getElementById("content");
+                row.innerHTML = data;
+            },
+            error: function(xhr) {
+
+            }
+        });
+    }
+
     $(document).ready(function () {
         let loadedContent = sessionStorage.getItem('loadedContent');
         if (loadedContent) {
