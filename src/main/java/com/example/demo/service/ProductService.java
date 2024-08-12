@@ -85,29 +85,29 @@ public class ProductService {
         return null;
     }
 
-    public List<Product> getProductBySellId(int id) {
-        List<Product> list = new ArrayList<>();
-        // Fetch products from database and add them to the list
-        String sql = "select * from products where sellId = ?; ";
-        try {
-            conn = new DataConnect().getConnection();
-            ps = conn.prepareStatement(sql);
-            ps.setInt(1, id);
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                Product product = new Product(rs.getInt("id"),
-                        rs.getString("name")
-                        , rs.getString("image")
-                        , rs.getDouble("price")
-                        , rs.getString("title")
-                        , rs.getString("description"));
-                list.add(product);
-            }
-        } catch (Exception e) {
-
-        }
-        return list;
-    }
+//    public List<Product> getProductBySellId(int id) {
+//        List<Product> list = new ArrayList<>();
+//        // Fetch products from database and add them to the list
+//        String sql = "select * from products where sellId = ?; ";
+//        try {
+//            conn = new DataConnect().getConnection();
+//            ps = conn.prepareStatement(sql);
+//            ps.setInt(1, id);
+//            rs = ps.executeQuery();
+//            while (rs.next()) {
+//                Product product = new Product(rs.getInt("id"),
+//                        rs.getString("name")
+//                        , rs.getString("image")
+//                        , rs.getDouble("price")
+//                        , rs.getString("title")
+//                        , rs.getString("description"));
+//                list.add(product);
+//            }
+//        } catch (Exception e) {
+//
+//        }
+//        return list;
+//    }
 
     public void insertProduct(String name, String image, double price, String title,
                                  String description, String category, int sid) {
@@ -167,6 +167,8 @@ public class ProductService {
         return list;
     }
 
+
+
     public void updateProduct(String name, String image, double price, String title,
                               String description, String category, int eid) {
         String sql = "  UPDATE products SET name =?, image =?,  price =?, title =?, description =?, cateId =? WHERE id =? ";
@@ -184,6 +186,62 @@ public class ProductService {
             System.out.println("Product inserted successfully!");
         } catch (Exception e) {
             System.out.println("Product error: " + e.getMessage());
+        }
+    }
+
+    public int getTotalProductBySellId(int sellId) {
+        String sql = "SELECT COUNT(*) as total FROM products where sellId = ?;";
+        try {
+            conn = new DataConnect().getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, sellId);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                return rs.getInt("total");
+            }
+        } catch (Exception e) {
+            System.out.println("Error executing"+e.getMessage());
+        }
+        return 0;
+    }
+
+    public List<Product> pagingProductBySellId (int index, int sellId) {
+        List<Product> list = new ArrayList<>();
+        String sql = "SELECT * " +
+                "FROM products " +
+                "WHERE sellId = ? " +
+                "ORDER BY id " +
+                "LIMIT 2 OFFSET ?;";
+        try {
+            conn = new DataConnect().getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, sellId);
+            ps.setInt(2, (index - 1) * 2);
+            rs = ps.executeQuery();
+            while(rs.next()) {
+                Product product = new Product(rs.getInt("id"),
+                        rs.getString("name")
+                       , rs.getString("image")
+                       , rs.getDouble("price")
+                       , rs.getString("title")
+                       , rs.getString("description"));
+                list.add(product);
+            }
+
+        }catch (Exception e) {
+            System.out.println("Error" +e.getMessage());
+        }
+        return list;
+    }
+
+    public static void main(String[] args) {
+        ProductService p = new ProductService();
+        // pagingProductBySellId
+        int index = 1;
+        int sellId = 1;
+        List<Product> products = p.pagingProductBySellId(index, sellId);
+        for (Product product : products) {
+            System.out.println(product);
         }
     }
 }

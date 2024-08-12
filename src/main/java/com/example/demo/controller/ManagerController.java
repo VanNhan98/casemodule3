@@ -29,18 +29,28 @@ public class ManagerController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
         Account account = (Account) session.getAttribute("account");
-        int id = account.getId();
-        List<Product> list = this.productService.getProductBySellId(id);
+        int sellId = account.getId();
+        System.out.println("checkkkkkkk"+sellId);
+        String intPage = req.getParameter("index");
+        if(intPage == null) {
+            intPage = "1";
+        }
 
+        int index = Integer.parseInt(intPage);
+        int count = this.productService.getTotalProductBySellId(sellId);
+        int endPage = count / 2 ;
+        if(count % 2 != 0) {
+            endPage++;
+        }
+        List<Product> list = this.productService.pagingProductBySellId(index, sellId);
         List<Category> listCategories = categoryService.getAllCategories();
+        req.setAttribute("listProducts", list);
         req.setAttribute("listC", listCategories);
-        req.setAttribute("lists", list);
+        req.setAttribute("endPage", endPage);
+        req.setAttribute("tag", index);
         req.getRequestDispatcher("/views/manager.jsp").forward(req, resp);
 
-    }
 
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
     }
 }

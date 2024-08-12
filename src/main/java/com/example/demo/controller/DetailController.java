@@ -30,7 +30,7 @@ public class DetailController extends HttpServlet {
         // get data from the service
         Product product = this.productService.getProductDetailById(id);
         List<Category> listCategories = categoryService.getAllCategories();
-        req.setAttribute("listCategories", listCategories);
+        req.setAttribute("listC", listCategories);
         // push the product up to the view
         req.setAttribute("detail", product);
         // forward to the detail view (views/detail.jsp)

@@ -31,17 +31,12 @@ public class HomeController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        // get list of products
-        List<Product> listProducts = productService.getAllProducts();
+        List<Product> list = this.productService.getAllProducts();
+        List<Category> categories = this.categoryService.getAllCategories();
+        req.setAttribute("listProducts", list);
+        req.setAttribute("listC", categories);
+        req.getRequestDispatcher("views/home.jsp").forward(req, resp);
 
-        List<Category> listCategories = categoryService.getAllCategories();
-        // push the products, categories up to the view
-        req.setAttribute("listProducts", listProducts);
-        req.setAttribute("listC", listCategories);
-
-        RequestDispatcher requestDispatcher = req.getRequestDispatcher("/views/home.jsp");
-        requestDispatcher.forward(req, resp);
     }
-
 
 }

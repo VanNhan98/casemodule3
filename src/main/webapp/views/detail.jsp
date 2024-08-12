@@ -62,8 +62,8 @@
                                     <div> <a href="#"><img src="/image/${detail.image}"></a></div>
                                 </div> <!-- slider-product.// -->
                                 <div class="img-small-wrap">
-                                </div> <!-- slider-nav.// -->
-                            </article> <!-- gallery-wrap .end// -->
+                                </div>
+                            </article>
                         </aside>
                         <aside class="col-sm-7">
                             <article class="card-body p-5">
@@ -93,17 +93,17 @@
                                                     <option> 3 </option>
                                                 </select>
                                             </dd>
-                                        </dl>  <!-- item-property .// -->
-                                    </div> <!-- col.// -->
+                                        </dl>
+                                    </div>
 
-                                </div> <!-- row.// -->
+                                </div>
                                 <hr>
                                 <a href="#" class="btn btn-lg btn-primary text-uppercase"> Buy now </a>
                                 <a href="#" class="btn btn-lg btn-outline-primary text-uppercase"> <i class="fas fa-shopping-cart"></i> Add to cart </a>
-                            </article> <!-- card-body.// -->
-                        </aside> <!-- col.// -->
-                    </div> <!-- row.// -->
-                </div> <!-- card.// -->
+                            </article>
+                        </aside>
+                    </div>
+                </div>
 
 
             </div>

@@ -51,7 +51,7 @@
     <nav>
         <form action="search" method="post" class="form-inline my-2 my-lg-0">
             <div class="input-group input-group-sm">
-                <input value="${nameDefault}" name="searchName" type="text" class="form-control"
+                <input oninput="searchByName(this)" value="${nameDefault}" name="searchName" type="text" class="form-control"
                        placeholder="Search...">
                 <div class="input-group-append">
                     <button type="submit" class="btn btn-secondary btn-number">

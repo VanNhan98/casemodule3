@@ -7,40 +7,44 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>Title</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Page</title>
+    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Font Awesome CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"  />
-    <link href="/css/style.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"/>
 </head>
 <body>
+<!-- Include menu -->
 <jsp:include page="menu.jsp"></jsp:include>
-<div class="container">
+
+<!-- Main container -->
+<div class="container" style="min-height: 600px;">
     <div class="row mt-5">
         <div class="container">
             <div class="row">
+                <!-- Include left sidebar -->
                 <jsp:include page="left.jsp"></jsp:include>
+
+                <!-- Product list -->
                 <div class="col-sm-9">
                     <div class="row">
                         <c:forEach items="${listProducts}" var="o">
-                            <div class="col-12 col-md-6 col-lg-4 mb-3 ">
+                            <div class="col-12 col-md-6 col-lg-4 mb-3">
                                 <div class="card h-100">
-                                    <img class="card-img-top"
-                                         src="/image/${o.image}"
-                                         alt="Card image cap">
+                                    <img class="card-img-top" src="/image/${o.image}" alt="${o.name}">
                                     <div class="card-body">
-                                        <h4 class="card-title show_txt"><a href="detail?id=${o.id}" title="View Product">${o.name}</a></h4>
-                                        <p class="card-text show_txt">${o.title}
-                                        </p>
+                                        <h4 class="card-title show_txt">
+                                            <a style="text-decoration: none; color: black; display: flex; justify-content: center; white-space: nowrap;" href="detail?id=${o.id}" title="View Product">${o.name}</a>
+                                        </h4>
                                         <div class="row">
-                                            <div class="col">
-                                                <p class="btn btn-danger btn-block">${o.price} $</p>
-                                            </div>
-                                            <div class="col">
-                                                <a href="#" class="btn btn-success btn-block">Add to cart</a>
+                                            <div class="col d-flex justify-content-center">
+                                                <p class="btn btn-success">${o.price} $</p>
                                             </div>
                                         </div>
                                     </div>
@@ -49,10 +53,14 @@
                         </c:forEach>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
 </div>
+
+<!-- jQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

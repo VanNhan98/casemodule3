@@ -32,7 +32,7 @@ public class SearchController extends HttpServlet {
 
         List<Product> list =  this.productService.searchProductByName(search);
         List<Category> listCategories = categoryService.getAllCategories();
-        req.setAttribute("listCategories", listCategories);
+        req.setAttribute("listC", listCategories);
 
         req.setAttribute("listProducts", list);
         req.setAttribute("nameDefault", search);
