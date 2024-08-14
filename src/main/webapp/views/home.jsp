@@ -75,7 +75,7 @@
             success: function(data) {
                 let row = document.getElementById("content");
                 row.innerHTML += data;
-                sessionStorage.setItem('loadedContent', row.innerHTML);
+                // sessionStorage.setItem('loadedContent', row.innerHTML);
             },
             error: function(xhr) {
 
@@ -101,12 +101,12 @@
         });
     }
 
-    $(document).ready(function () {
-        let loadedContent = sessionStorage.getItem('loadedContent');
-        if (loadedContent) {
-            document.getElementById('content').innerHTML = loadedContent;
-        }
-    });
+    // $(document).ready(function () {
+    //     let loadedContent = sessionStorage.getItem('loadedContent');
+    //     if (loadedContent) {
+    //         document.getElementById('content').innerHTML = loadedContent;
+    //     }
+    // });
 </script>
 </body>
 </html>

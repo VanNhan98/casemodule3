@@ -58,7 +58,7 @@ public class AccountService {
     }
 
     public void signup(String username, String password) {
-        String sql = "INSERT INTO accounts(username, password, sell, admin) VALUES(?,?,0,0)";
+        String sql = "INSERT INTO accounts(username, password, sell, isadmin) VALUES(?,?,0,0)";
         try {
             conn = DataConnect.getConnection();
             ps = conn.prepareStatement(sql);
