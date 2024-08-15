@@ -1,12 +1,9 @@
 package com.example.demo.controller;
 
-
 import com.example.demo.domain.Category;
 import com.example.demo.domain.Product;
-import com.example.demo.service.CategoryService;
 import com.example.demo.service.ProductService;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,14 +12,11 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name = "DetailController", urlPatterns = {"/detail"})
-public class DetailController extends HttpServlet {
+@WebServlet(name = "CartController", urlPatterns = {"/cart/*"})
+public class CartController extends HttpServlet {
     private ProductService productService;
-    private CategoryService categoryService;
-
-    public DetailController() {
+    public CartController() {
         this.productService = new ProductService();
-        this.categoryService = new CategoryService();
     }
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -30,12 +24,7 @@ public class DetailController extends HttpServlet {
         System.out.println("checkkk"+id);
         // get data from the service
         Product product = this.productService.getProductDetailById(id);
-        List<Category> listCategories = categoryService.getAllCategories();
-        req.setAttribute("listC", listCategories);
-        // push the product up to the view
-        req.setAttribute("detail", product);
-        // forward to the detail view (views/detail.jsp)
-        RequestDispatcher requestDispatcher = req.getRequestDispatcher("/views/detail.jsp");
-        requestDispatcher.forward(req, resp);
+        req.setAttribute("listProducts", product);
+        req.getRequestDispatcher("views/cart.jsp").forward(req, resp);
     }
 }

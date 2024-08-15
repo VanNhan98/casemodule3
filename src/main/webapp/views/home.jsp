@@ -101,6 +101,23 @@
         });
     }
 
+    function load(cateId) {
+        $.ajax({
+            url: "/category",
+            type: "get",
+            data: {
+                cid: cateId
+            },
+            success: function(data) {
+                let row = document.getElementById("content");
+                row.innerHTML = data;
+            },
+            error: function(xhr) {
+
+            }
+        });
+    }
+
     // $(document).ready(function () {
     //     let loadedContent = sessionStorage.getItem('loadedContent');
     //     if (loadedContent) {

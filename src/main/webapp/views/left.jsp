@@ -27,9 +27,10 @@
       cursor: pointer;
     }
 
-    .list-group-item.active {
+    .list-group-item:hover {
       background-color: #b6b2b2;
     }
+
 
 
   </style>
@@ -40,8 +41,10 @@
     <div class="card-header text-white text-uppercase" style="background: #435d7d"><i class="fa fa-list"></i> Categories</div>
     <ul class="list-group category_block">
       <c:forEach items="${listC}" var="o">
-        <li class="list-group-item text-white ${tag == o.id ? "active" : ""} " >
-          <a href="category?id=${o.id}">${o.name}</a></li>
+        <li class="list-group-item text-black" >
+          <a onclick="load(${o.id})">${o.name}</a></li>
+<%--        <li class="list-group-item text-white ${tag == o.id ? "active" : ""} " >--%>
+<%--          <a href="category?id=${o.id}">${o.name}</a></li>--%>
       </c:forEach>
     </ul>
   </div>

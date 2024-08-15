@@ -46,16 +46,16 @@
             <label class="txt">Sign In</label>
             <p class="text-danger">${error}</p>
             <div class="form-floating">
-                <input name="username" type="text" class="form-control" placeholder="name@example.com">
+                <input name="username" value="${username}" type="text" class="form-control" placeholder="name@example.com">
                 <label>Email address</label>
             </div>
             <div class="form-floating mb-3">
-                <input name="password" type="password" class="form-control" placeholder="Password">
+                <input name="password" value="${password}" type="password" class="form-control" placeholder="Password">
                 <label>Password</label>
             </div>
             <div class="checkbox mb-3">
                 <label>
-                    <input type="checkbox" value="remember-me"> Remember me
+                    <input name="remember" type="checkbox" value="remember-me"> Remember me
                 </label>
             </div>
             <button class="w-100 btn btn-lg btn-success mb-3" type="submit">Sign in</button>
