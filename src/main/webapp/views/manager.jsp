@@ -71,7 +71,7 @@
                                 <td>
                                     <div class="btn-action d-flex justify-content-center">
                                         <a href="delete?id=${o.id}" class="btn btn-danger" style="margin-right: 5px;">Delete</a>
-                                        <a href="loadProduct?id=${o.id}" class="btn btn-warning">Edit</a>
+                                        <a href="editProduct?id=${o.id}" class="btn btn-warning">Edit</a>
                                     </div>
                                 </td>
                             </tr>

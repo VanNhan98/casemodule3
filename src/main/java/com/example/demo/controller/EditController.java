@@ -25,6 +25,14 @@ public class EditController extends HttpServlet {
     }
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String id  = req.getParameter("id");
+        System.out.println("cccccc"+id);
+        Product product = this.productService.getProductDetailById(id);
+        List<Category> categories = this.categoryService.getAllCategories();
+        req.setAttribute("listC", categories);
+        req.setAttribute("detail", product);
+
+        req.getRequestDispatcher("views/edit.jsp").forward(req, resp);
 
     }
 
